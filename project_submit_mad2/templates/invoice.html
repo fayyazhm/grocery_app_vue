@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <style>
+    .nav-link{
+      color:black
+    }
+    .btn-primary,.btn-outline-success,.btn-success {
+    --bs-btn-color: black;
+    --bs-btn-bg: lightyellow;
+    --bs-btn-border-color: darkslategray;
+    --bs-btn-hover-color: black;
+    --bs-btn-hover-bg: seagreen;
+    --bs-btn-hover-border-color: lightgrey;
+  }
+  .table {
+    border-collapse: collapse;
+  }
+  .table th,
+  .table td {
+    border: 1px solid black;
+    padding: 8px;
+  }
+  .center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+  }
+  </style>
+</head>
+<body>
+  <p style="font-size:30px;text-align:end;margin-right: 50px;">DATE : {{ dat }} </p>
+  <div>
+    {% if carnox!=[] %}
+      {% for l in carnox %}
+      {% for p in prod %}
+      {% if l.cart_product == p.product_id %}
+      <p style="font-size: 20px;">Sorry {{ p.product_name }} is not available right now for the requested quantity!!!!</p>
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+      {% endif %}
+      <br>
+      {% if ordcx!=[] %}
+    <div class="center-container">
+      <h2> Thank you For Ordering :-)</h2>
+        <br>
+      <h1>Order Number # {{ ordcx[0].order_number }}</h1>
+    </div>
+      <table class="table" style="width:90%;margin-left: 35px;">
+        <thead style="background-color:dimgrey;">
+          <tr>
+            <th style="width:53px" scope="col">SL_NO</th>
+            <th scope="col">PRODUCT NAME</th>
+            <th scope="col">PRODUCT PRICE</th>
+            <th scope="col">PRODUCT QTY</th>
+            <th scope="col">PRODUCT TOTAL</th>
+          </tr>
+        </thead>        
+        {% for i in ordcx %}
+          {% for c in prod %}
+            {% if i.order_productid == c.product_id %}
+          <tbody>
+          <tr>
+            <td><input type="number" name="product_quantity_{{ i.order_number }}" value= '{{ i.order_itemnumber  }}' readonly style="background-color: lightgrey;width:53px" /></td>
+            <td><input type="text" name="product_name_{{ i.order_number }}" value= '{{ c.product_name  }}' readonly style="background-color: lightgrey;" /></td>
+            <td><input type="number" name="product_qty_{{ i.order_number }}" value= '{{ i.order_itemprice  }}' readonly style="background-color: lightgrey;" /></td>
+            <td><input type="number" name="product_price_{{ i.order_number }}" value= '{{ i.order_qty }}' readonly style="background-color: lightgrey;" /></td>
+            <td><input type="number" name="product_total_{{ i.order_number }}" value= '{{ i.order_qty  * i.order_itemprice }}' readonly style="background-color: lightgrey;" /></td>
+          </tr>
+          </tbody>
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+          <tr>
+            <td colspan="4" style="text-align: left; padding-right: 20px;font-size: 25px;">FULL TOTAL</td>
+            <td><input type="number" name="product_fulltotal_{{ user.id }}" value="{{ totx.total_orderamount }}" readonly style="background-color: lightgrey;font-size: 20px;width:256px" /></td>
+          </tr>
+          <tr>
+          <td colspan="5" style="text-align: center;" >
+            <h2>Your Order will be Delivered to</h2>
+            <p style="font-size:20px;">{{ totx.total_orderaddress|upper }},</p>
+            <p style="font-size:20px;">{{ totx.total_orderaddress2|upper }},</p>
+            <p style="font-size:20px;">{{ totx.total_ordercity|upper }},</p>
+            <p style="font-size:20px;">{{ totx.total_orderstate|upper }},</p>
+            <p style="font-size:20px;">{{ totx.total_orderzip }}</p>
+            <p style="font-size:20px;"> Your Order Will Be Delivered Before:{{ delivery_date }}</p>
+          </td>
+          </tr>      
+      </table>
+    </form>
+    {% endif %}
+  </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title style='position:relative;left:80px; top:2px' >Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router@3.0.0/dist/vue-router.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <style>  
+    .button {
+  background-color:grey;
+  border: none;
+  color: white;
+  padding: 70px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  height: 175px;
+  width:175px;
+  border-radius: 100%
+}
+
+#rcorners1 {
+  border-radius: 25px;
+  background: rgb(64, 132, 167);
+  padding: 20px; 
+  width: 550px;
+  height: auto;  
+}
+
+#rcorners2 {
+  display: flex;
+  border-radius: 25px;
+  background: darkslategray;
+  padding: 20px; 
+  width: auto;
+  height: auto;  
+  text-overflow: ellipsis;
+  justify-content: space-between;
+  align-items: center;
+  height: auto;
+  text-align: center;
+  margin-bottom: 10px; 
+}
+
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-group {
+  margin-top: 20px;
+}
+
+.buttons {
+  height: 135px;
+  width: 135px;
+  padding: 15px;
+  colour:black
+}
+.nav-link{
+  color:black
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: 50vh;
+  margin-top:250px;
+  width:40%;
+  background-color:steelblue
+}
+
+.btn-primary{
+    --bs-btn-color: black;
+    --bs-btn-bg: lightyellow;
+    --bs-btn-border-color: darkslategray;
+    --bs-btn-hover-color: black;
+    --bs-btn-hover-bg: seagreen;
+    --bs-btn-hover-border-color: lightgrey;
+  }
+  
+  .table {
+    border-collapse: collapse;
+  }
+  .table th,
+  .table td {
+    border: 1px solid black;
+    padding: 8px;
+  }
+  .rating-wrapper{
+      direction:rtl;
+      margin-bottom:6px;
+      margin-top: 10px;
+    }
+  .rating-wrapper input{
+      display:none;
+    }
+  .rating-wrapper label{
+     display:inline-block;   
+     width: 40px;
+     position:relative;
+     cursor: pointer;
+    }
+    .rating-wrapper label:before{
+     content:" \2605";
+      position: absolute;
+      font-size:40px;
+      display: inline-block;
+      color: beige;
+      top: -40px;
+      left: 0;
+    }
+    .rating-wrapper label:after{
+     content:" \2605";
+      position: absolute;
+      font-size:40px;
+      display: inline-block;
+      color: darkcyan;
+      top: -40px;
+      left: 0;
+      opacity:0;  
+    }
+
+    .rating-wrapper input:checked ~ label:after
+    {
+      opacity:1;  
+    }
+</style>
+</head>
+<body style="background-color: lightsteelblue;">
+  <div id="app">
+        <div style='border:2px solid black;background-color:skyblue;' class="d-flex justify-content-between">
+          <div style="justify-content:flex-start">
+            <h1 style="display:inline-block">ADMIN DASHBOARD</h1>
+          </div>
+          <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <router-link to="/admin/home" class="nav-link">HOME</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/admin/summary" class="nav-link">SUMMARY</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/admin/authorization" class="nav-link">AUTHORIZATION</router-link>
+            </li>
+            <li class="nav-item">
+              <a href="/logout" class="nav-link">LOGOUT</a>
+            </li>
+          </ul>
+        </div>
+              <router-view></router-view>
+  </div>
+<script type="module" src="{{ url_for('static',filename='file.js') }}"></script>
+</html>
